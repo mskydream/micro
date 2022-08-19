@@ -7,21 +7,22 @@ import (
 )
 
 type Configuration struct {
-	Database DB     `mapstucture:"db"`
+	Database DB     `mapstructure:"db"`
 	Port     string `mapstructure:"port"`
 }
 
 type DB struct {
+	Host     string `mapstructure:"host"`
 	Address  string `mapstructure:"address"`
-	User     string `mapstructure:"user"`
-	Password string `mapstructure:"password"`
+	Username string `mapstructure:"user"`
+	Password string `mapstructure:"pass"`
 	Name     string `mapstructure:"name"`
 }
 
 func LoadConfig() (config Configuration, err error) {
 	viper.SetConfigName("dev")
 	viper.SetConfigType("env")
-	viper.AddConfigPath(".")
+	viper.AddConfigPath("./")
 	viper.AutomaticEnv()
 
 	err = viper.ReadInConfig()
@@ -32,5 +33,4 @@ func LoadConfig() (config Configuration, err error) {
 	err = viper.Unmarshal(&config)
 	fmt.Println(config)
 	return
-
 }
