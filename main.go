@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/mskydream/micro/config"
+	"github.com/mskydream/micro/database"
 )
 
 func main() {
@@ -12,6 +12,5 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	fmt.Println(c)
-	// database.Init()
+	database.Init(&c)
 }
